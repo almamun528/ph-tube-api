@@ -20,20 +20,31 @@ const displayVideos = (videos) => {
     const card = document.createElement("div");
     card.classList = "card card-compact bg-base-100 shadow";
     card.innerHTML = `
-    <figure class ="h-[200px]"> 
+    <figure class ="h-[200px] relative"> 
     <img class ="h-full w-full object-cover"
       src= ${video.thumbnail}
       alt="Shoes" />
-  </figure>
+      ${
+        video.others.posted_date?.length == 0
+          ? ""
+          : `<span class=" absolute bg-black text-white bottom-2 right-4 p-2 rounded-lg  "> ${getTime(video.others.posted_date)} </span>`
+      }
+        </figure>
   <div class="card-body">
     <div class="flex gap-3 items-center"> 
-    <img class ="w-10 h-10 rounded-full object-cover" src= ${video.authors[0].profile_picture} />
+    <img class ="w-10 h-10 rounded-full object-cover" src= ${
+      video.authors[0].profile_picture
+    } />
     <h2 class=" font-semibold text-xl ">${video.title}</h2>
     </div>
     <div class="flex items-center gap-2">
     <p class=" text-gray-400" >${video.authors[0].profile_name}</p> 
     
-     ${video.authors[0].verified == true ? ` <img class="w-5" src ="https://img.icons8.com/?size=96&id=98A4yZTt9abw&format=png"/> ` : ""}
+     ${
+       video.authors[0].verified == true
+         ? ` <img class="w-5" src ="https://img.icons8.com/?size=96&id=98A4yZTt9abw&format=png"/> `
+         : ""
+     }
     </div>
     
     <p class=" text-gray-400 " >${video.others.views} views</p>
@@ -57,7 +68,6 @@ const displayCatagories = (categories) => {
 
 loadCatagories();
 loadVideos();
-
 
 // const video = {
 //   "category_id": "1003",
